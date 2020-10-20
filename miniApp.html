@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+   <head>
+       <meta charset="utf-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+       <title>StudentListApp</title>
+   </head>
+   <body>
+       <header class="main-header bg-dark">
+               <nav class="navbar navbar-expand">
+                   <a class="navbar-brand text-white">Student Management MiniApp</a>
+                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                   </button>
+                    <ul class="navbar-nav mr-auto ">
+                      <li class="nav-item active">
+                        <a class="nav-link text-light" href="#">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-light" href="#">About</a>
+                      </li>
+                    </ul>
+               </nav>
+       </header>
+
+       <div class="container">
+        <h1 class="display-3"><span class="text-dark">Student Management</span><br/>MiniApp</h1>
+        <hr>
+        <div style="display: flex;">
+            <div style="flex-grow: 2;">
+                <h4> Add Student </h4>
+                <br/>
+                
+            <button type="button" class="btn rounded-0 btn-info" id="add_student_button" 
+            data-toggle="collapse" data-target="#student_form_collapsable" aria-expanded="false" 
+            aria-controls="student_form_collapsable" onclick="show_addstudent_form_button()">Show Form Add New Student</button>
+
+                <div class="collapse multi-collapse pt-3 mr-5" id="student_form_collapsable">
+                    <form>
+                        <div class="form-group">
+                            <label for="form_student_id">Student ID (NIM)</label>
+                            <input type="text" class="form-control rounded-0" id="form_student_id">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="form_student_name">Full Name</label>
+                            <input type="text" class="form-control rounded-0" id="form_student_name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Gender:</label>
+                            <div class="form-check">
+                                <input class="form-checkInput" type="radio" name="genderRadio" id="genderRadio1" value="Male">
+                                <label class="form-checkLabel" for="genderRadio1">
+                                  Male
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-checkInput" type="radio" name="genderRadio" id="genderRadio2" value="Female">
+                                <label class="form-checkLabel" for="genderRadio2">
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p>Faculty</p>
+                            <select class="form-control rounded-0" id="form_student_faculty"
+                             onchange="form_student_faculty_onchange()">
+                                <option>-- SELECT FACULTY --</option>
+                                <option>Pascasarjana</option>
+                                <option>Fakultas Filsafat</option>
+                                <option>Fakultas Keguruan dan Ilmu Pendidikan</option>
+                                <option>Fakultas Ekonomi dan Bisnis</option>
+                                <option>Fakultas Pertanian</option>
+                                <option>Fakultas Ilmu Komputer</option>
+                                <option>Fakultas Keperawatan</option>
+                                <option>Akademi Sekretari Manajemen Indonesia Klabat</option>
+                            </select>
+                            <p><br/>Program of Study</p>
+                            <select class="form-control rounded-0" id="form_student_programOfStudy">
+                                <option>-- SELECT PROGRAM OF STUDY --</option>
+                            </select>
+                            <br/>
+                        </div>
+
+                        <button type="button" 
+                        class="btn rounded-0 btn-info w-100" 
+                        id="form_add_student_button"
+                        onclick="add_student()">Add Student</button>
+                    </form>
+                 </div>
+             </div>
+             <div style="width: em; flex-shrink: 2;">
+                <h4>Filter Student By</h4>
+                
+                <p>Faculty</p>
+                <select class="form-control rounded-0" id="selectByFaculty">
+                    <option>-- SELECT FACULTY --</option>
+                    <option>Akademi Sekretari Manajemen Indonesia Klabat</option>
+                    <option>Fakultas Ekonomi dan Bisnis</option>
+                    <option>Fakultas Filsafat</option>
+                    <option>Fakultas Ilmu Komputer</option>
+                    <option>Fakultas Keguruan dan Ilmu Pendidikan</option>
+                    <option>Fakultas Keperawatan</option>
+                    <option>Fakultas Pertanian</option>
+                    <option>Pascasarjana</option>
+                </select>
+                <br/>
+                <button type="button" class="btn rounded-0 btn-info w-100" id="show_student_button" onclick="search_byFaculty()">Show Student</button>
+                
+                <p> <br/>Program of Study</p>
+                <select class="form-control rounded-0" id="selectByProgramOfStudy">
+                    <option>-- SELECT PROGRAM OF STUDY --</option>
+                    <option>Agroteknologi</option>
+                    <option>Akuntansi</option>
+                    <option>Ilmu Filsafat</option>
+                    <option>Informatika</option>
+                    <option>Keperawatan</option>
+                    <option>Magister Manajemen</option>
+                    <option>Magister Teologi</option>
+                    <option>Manajemen</option>
+                    <option>Pendidikan Agama</option>
+                    <option>Pendidikan Bahasa Inggris</option>
+                    <option>Pendidikan Ekonomi</option>
+                    <option>Pendidikan Luar Sekolah</option>
+                    <option>Profesi Ners</option>
+                    <option>Sekretari (D3)</option>
+                    <option>Sistem Informasi</option>
+                </select>
+                <br/>
+                <button type="button" class="btn rounded-0 btn-info w-100" id="show_student_button" onclick="search_byProgramOfStudy()"> Show Student </button>
+            </div>
+        </div>
+    </div>
+    <div class="container border-top mt-3">
+        <div style="display: flex; justify-content: center; flex-direction: column; text-align: center;">
+            <h1 class="display-4 mt-4">Our Student</h1>
+            <input class="form-control rounded-0" id="form_search_student" type="text" placeholder="Search student by name..." oninput="search_student()">
+            <table class="table mt-3" id="student_table_data">
+                <thead>
+                  <tr>
+                    <th scope="col">Student ID (NIM)</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Faculty</th>
+                    <th scope="col">Program of Study</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="student_tableData_body">
+                </tbody>
+              </table>
+        </div>
+    </div>
+    
+       <script>
+        let student_table_data = document.getElementById("student_tableData_body");
+        let form_search_student = document.getElementById("form_search_student");
+        let student_data = [
+            {
+                "NIM" : "115021812345",
+                "fullName" : "William Somba",
+                "gender" : "Male",
+                "faculty" : "Fakultas Filsafat",
+                "programOfStudy" : "Filsafat"
+            },
+            {
+                "NIM" : "115021812344",
+                "fullName" : "Christy Panambunan",
+                "gender" : "Female",
+                "faculty" : "Fakultas Ilmu Komputer",
+                "programOfStudy" : "Informatika"
+            },
+            {
+                "NIM" : "105021812345",
+                "fullName" : "Adyano Mamahit",
+                "gender" : "Male",
+                "faculty" : "Fakultas Ekonomi dan Bisnis",
+                "programOfStudy" : "Akuntansi"
+            }
+        ]
+
+        function refresh_tableData() {
+            while(student_table_data.children.length > 0) {
+                student_table_data.removeChild(student_table_data.children[0]);
+            }
+
+            for(let i=0; i<student_data.length; i++) {
+                let row = student_table_data.insertRow();
+                let NIM = row.insertCell(0);
+                NIM.innerHTML = student_data[i].NIM;
+                let fullName = row.insertCell(1);
+                fullName.innerHTML = student_data[i].fullName;
+                let gender = row.insertCell(2);
+                gender.innerHTML = student_data[i].gender;
+                let faculty = row.insertCell(3);
+                faculty.innerHTML = student_data[i].faculty;
+                let programOfStudy = row.insertCell(4);
+                programOfStudy.innerHTML = student_data[i].programOfStudy;
+                let removeButton_cell = row.insertCell(5);
+                
+                let removeButton = document.createElement("button");
+                removeButton.classList.add("btn");
+                removeButton.classList.add("btn-danger");
+                removeButton.innerHTML = "<svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-person-dash' fill='white' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM11 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z'/></svg>";
+                removeButton.addEventListener('click', (e) => {
+                    student_data.splice(i, 1);
+                    refresh_tableData();
+                })
+                removeButton_cell.appendChild(removeButton);
+            }
+        }
+
+        refresh_tableData();
+       </script>
+
+       <footer class="page-footer font-small bg-dark" >
+        <div class="text-center text-white py-3">
+        <p>Feldryansa &copy; 2020</p>
+        </div> 
+    </footer>
+       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+   </body>
+</html>
